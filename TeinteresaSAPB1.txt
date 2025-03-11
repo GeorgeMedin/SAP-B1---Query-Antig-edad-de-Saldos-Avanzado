@@ -1,0 +1,6 @@
+Aquí tienes la documentación original de SAP Business One sobre el informe de Antigüedad de Clientes.
+
+📖 Échale un ojo para entender mejor cómo funciona y cómo se estructura:
+🔗 Ver documentación oficial: https://help.sap.com/docs/SAP_BUSINESS_ONE/68a2e87fb29941b5bf959a184d9c6727/5dc639396f564b4581d5405d3b6531ff.html?locale=es-CO
+
+Si tienes dudas, esta referencia te puede ayudar a profundizar en el tema. 😉
