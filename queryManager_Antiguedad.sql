@@ -1,11 +1,11 @@
-DECLARE @VAR INT, @FECHAFIN DATETIME
-SET @FECHAFIN = '2025-03-11';
+DECLARE @fechaRegistro DATETIME
+SET @fechaRegistro = '2025-03-11'; #Variable de fecha de registro
 
 WITH ReconData AS (
     SELECT T0.ShortName AS SN, T0.TransId, SUM(T0.ReconSum) AS ReconSum, T0.IsCredit AS DebHab, T0.TransRowId AS Linea
     FROM ITR1 T0
     INNER JOIN OITR T1 ON T1.ReconNum = T0.ReconNum
-    WHERE T1.ReconDate <= @FECHAFIN AND T1.CancelAbs = ''
+    WHERE T1.ReconDate <= @fechaRegistro AND T1.CancelAbs = ''
     GROUP BY T0.ShortName, T0.TransId, T0.IsCredit, T0.TransRowId
 ),
 
@@ -29,7 +29,7 @@ Informe_Antiguedad AS (
     INNER JOIN OJDT T4 ON T4.TransId = T1.TransId   
     INNER JOIN OUSR T5 ON T5.USERID = T1.UserSign
     INNER JOIN OTER T6 ON T6.territryID = T0.Territory
-    WHERE T0.CardType = 'C' AND T1.RefDate <= @FECHAFIN
+    WHERE T0.CardType = 'C' AND T1.RefDate <= @fechaRegistro
 )
 
 SELECT 
@@ -38,14 +38,14 @@ SELECT
 	CONVERT(DATE, TaxDate) [Fecha Documento], 
 	CONVERT(DATE, DueDate) [Fecha Contab.], 
 	Saldo,
-       CASE WHEN DATEDIFF(DAY, RefDate, @FECHAFIN) <= 30 THEN Saldo END AS "0-30 dias",
-       CASE WHEN DATEDIFF(DAY, RefDate, @FECHAFIN) BETWEEN 31 AND 60 THEN Saldo END AS "31-60 dias",
-       CASE WHEN DATEDIFF(DAY, RefDate, @FECHAFIN) BETWEEN 61 AND 90 THEN Saldo END AS "61-90 dias",
-       CASE WHEN DATEDIFF(DAY, RefDate, @FECHAFIN) BETWEEN 91 AND 120 THEN Saldo END AS "91-120 dias",
-       CASE WHEN DATEDIFF(DAY, RefDate, @FECHAFIN) > 120 THEN Saldo END AS "+120 dias",
+       CASE WHEN DATEDIFF(DAY, RefDate, @fechaRegistro) <= 30 THEN Saldo END AS "0-30 dias",
+       CASE WHEN DATEDIFF(DAY, RefDate, @fechaRegistro) BETWEEN 31 AND 60 THEN Saldo END AS "31-60 dias",
+       CASE WHEN DATEDIFF(DAY, RefDate, @fechaRegistro) BETWEEN 61 AND 90 THEN Saldo END AS "61-90 dias",
+       CASE WHEN DATEDIFF(DAY, RefDate, @fechaRegistro) BETWEEN 91 AND 120 THEN Saldo END AS "91-120 dias",
+       CASE WHEN DATEDIFF(DAY, RefDate, @fechaRegistro) > 120 THEN Saldo END AS "+120 dias",
        CASE
-           WHEN DATEDIFF(DAY, RefDate, @FECHAFIN) BETWEEN 121 AND 365 THEN Saldo * 0.75
-           WHEN DATEDIFF(DAY, RefDate, @FECHAFIN) > 365 THEN Saldo
+           WHEN DATEDIFF(DAY, RefDate, @fechaRegistro) BETWEEN 121 AND 365 THEN Saldo * 0.75
+           WHEN DATEDIFF(DAY, RefDate, @fechaRegistro) > 365 THEN Saldo
        END AS "Deuda Dudosa",
        Comentarios,
        Usuario, descript [Ciudad]
