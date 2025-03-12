@@ -14,7 +14,7 @@ Muchos usuarios han señalado que el reporte de antigüedad en SAP Business One 
 
 ## 📂 Cómo usarlo  
 1. 📥 Importa el query en el **Query Manager** de SAP B1  
-2. 🔎 Ejecuta la consulta y asigna un valor a la variable @FECHAFIN, ubicada en la parte superior. También puedes permitir que el usuario seleccione la fecha manualmente utilizando ['0%'], lo que hará que el sistema solicite la fecha al ejecutar el query. Ajusta esta configuración según tus necesidades.  
+2. 🔎 Ejecuta la consulta y asigna un valor a la variable @fechaRegistro, ubicada en la parte superior. También puedes permitir que el usuario seleccione la fecha manualmente utilizando ['0%'], lo que hará que el sistema solicite la fecha al ejecutar el query. Ajusta esta configuración según tus necesidades.  
 3. 📊 Usa la información para optimizar la gestión de cartera  
 
 ## 💡 Notas adicionales  
